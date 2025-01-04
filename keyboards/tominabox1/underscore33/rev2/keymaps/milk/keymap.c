@@ -17,66 +17,70 @@
 
 enum layers{
   _BASE,
-  _NUM_SYM,
-  _NAV
+  _SYM,
+  _NAV,
+  _NUM
 };
 
-#define KC_NUM_SPC LT(_NUM_SYM, KC_SPC)
-#define KC_NAV_ENT LT(_NAV, KC_ENT)
-#define KC_GA LGUI_T(KC_A)
-#define KC_AS LALT_T(KC_S)
-#define KC_CD LCTL_T(KC_D)
-#define KC_SF LSFT_T(KC_F)
-#define KC_SJ RSFT_T(KC_J)
-#define KC_CK RCTL_T(KC_K)
-#define KC_AL RALT_T(KC_L)
-#define KC_GSCLN RGUI_T(KC_SCLN)
+#define LT_TAB LT(_NUM, KC_TAB)
+#define LT_SPC LT(_SYM, KC_SPC)
+#define MT_LSFT LSFT_T(KC_ESC)
+#define FN_NAV MO(_NAV)
+#define LT_CN LCTL_T(KC_N)
+#define LT_AS LOPT_T(KC_S)
+#define LT_GT LCMD_T(KC_T)
+#define LT_SD LSFT_T(KC_D)
+#define LT_SR RSFT_T(KC_R)
+#define LT_GA RCMD_T(KC_A)
+#define LT_AE ROPT_T(KC_E)
+#define LT_CI RCTL_T(KC_I)
 
 enum combo_events {
-  COMBO_BSPC,
-  COMBO_NUMBAK,
   COMBO_TAB,
   COMBO_ESC,
-  COMBO_DEL,
+  COMBO_ENT,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_33_split_space(
-    KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,    KC_I,   KC_O,     KC_P,
-   KC_GA,  KC_AS,  KC_CD,  KC_SF,   KC_G,   KC_H,  KC_SJ,   KC_CK,  KC_AL, KC_GSCLN,
-    KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M, KC_COMM, KC_DOT,  KC_SLSH,
-                 KC_LCTL, KC_LALT, KC_NAV_ENT, KC_NUM_SPC, KC_RGUI, KC_RCTL
+    KC_V,    KC_F,    KC_M,    KC_W,    KC_G,    KC_X,    KC_J,    KC_O,    KC_U,    KC_COMM,
+    LT_CN,   LT_AS,   LT_GT,   LT_SD,   KC_Y,    KC_H,    LT_SR,   LT_GA,   LT_AE,   LT_CI,
+    KC_B,    KC_Z,    KC_K,    KC_C,    KC_P,    KC_Q,    KC_L,    KC_QUOT, KC_SLSH, KC_DOT,
+                      KC_NO,   FN_NAV,  MT_LSFT, LT_SPC,  LT_TAB,  KC_NO
   ),
 
-  [_NUM_SYM] = LAYOUT_33_split_space(
-       KC_1,     KC_2,     KC_3,     KC_4,      KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,
-    KC_EXLM,    KC_AT,  KC_HASH,   KC_DLR,   KC_PERC,  KC_CIRC,  KC_AMPR,  KC_ASTR, KC_EQUAL,  KC_MINS,
-    KC_BSLS,  KC_LCBR,  KC_LBRC,  KC_LPRN,   KC_UNDS,  KC_RPRN,  KC_RBRC,  KC_RCBR,   KC_DOT,   KC_GRV,
-                  KC_TRNS,   KC_TRNS,  KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS
+  [_SYM] = LAYOUT_33_split_space(
+    KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_EQL,  KC_GRV,  KC_COLN, KC_SCLN, KC_PLUS,
+    KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_CIRC, KC_ASTR, KC_LPRN, KC_LCBR, KC_LBRC, KC_MINS,
+    KC_NO,   KC_NO,   KC_BSLS, KC_PIPE, KC_AMPR, KC_TILD, KC_RPRN, KC_RCBR, KC_RBRC, KC_UNDS,
+                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
   [_NAV] = LAYOUT_33_split_space(
-    QK_BOOT,  KC_NO,    KC_NO,    KC_NO,  KC_NO,   KC_GRV,  KC_PGDN,    KC_UP,  KC_PGUP,  KC_SCLN,
-    UG_TOGG,  UG_HUEU,  UG_SATU,  UG_VALU,  KC_NO,  KC_HOME,  KC_LEFT,  KC_DOWN,  KC_RGHT,   KC_END,
-    UG_NEXT,  UG_HUED,  UG_SATD,  UG_VALD,  KC_NO,  KC_MINS,    KC_INT1,  KC_COMM,   KC_DOT,  KC_BSLS,
-                   KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS
+    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_DEL,
+    QK_BOOT, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BSPC, KC_TAB,  KC_NO,   KC_NO,
+                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+
+  [_NUM] = LAYOUT_33_split_space(
+    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
+    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 };
 
 
 #ifdef COMBO_ENABLE
-const uint16_t PROGMEM combo_bspc[] = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM combo_numbak[] = {KC_0, KC_9, COMBO_END};
 const uint16_t PROGMEM combo_tab[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_esc[] = {KC_E, KC_W, COMBO_END};
-const uint16_t PROGMEM combo_del[] = {KC_MINS, KC_EQL, COMBO_END};
+const uint16_t PROGMEM combo_ent[] = {FN_NAV, LT_TAB, COMBO_END};
 
 combo_t key_combos[] = {
-  [COMBO_BSPC] = COMBO(combo_bspc,KC_BSPC),
-  [COMBO_NUMBAK] = COMBO(combo_numbak,KC_BSPC),
   [COMBO_TAB] = COMBO(combo_tab,KC_TAB),
   [COMBO_ESC] = COMBO(combo_esc,KC_ESC),
-  [COMBO_DEL] = COMBO(combo_del,KC_DEL),
+  [COMBO_ENT] = COMBO(combo_ent,KC_ENT),
 
 };
 #endif
