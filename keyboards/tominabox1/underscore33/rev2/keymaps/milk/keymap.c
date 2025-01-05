@@ -43,9 +43,9 @@ enum combo_events {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_33_split_space(
-    KC_V,    KC_F,    KC_M,    KC_W,    KC_G,    KC_X,    KC_J,    KC_O,    KC_U,    KC_COMM,
+    KC_Z,    KC_C,    KC_M,    KC_P,    KC_K,    KC_J,    KC_V,    KC_O,    KC_U,    KC_COMM,
     LT_CN,   LT_AS,   LT_GT,   LT_SD,   KC_Y,    KC_H,    LT_SR,   LT_GA,   LT_AE,   LT_CI,
-    KC_B,    KC_Z,    KC_K,    KC_C,    KC_P,    KC_Q,    KC_L,    KC_QUOT, KC_SLSH, KC_DOT,
+    KC_B,    KC_NO,   KC_G,    KC_F,    KC_W,    KC_Q,    KC_L,    KC_X,    KC_SLSH, KC_DOT,
                       KC_NO,   FN_NAV,  MT_LSFT, LT_SPC,  LT_TAB,  KC_NO
   ),
 
