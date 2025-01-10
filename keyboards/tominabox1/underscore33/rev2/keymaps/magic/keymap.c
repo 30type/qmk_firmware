@@ -26,14 +26,13 @@ enum layers{
 #define LT_SPC LT(_SYM, KC_SPC)
 #define MT_LSFT OSM(MOD_LSFT)
 #define FN_NAV LT(_NAV, KC_ESC)
-#define LT_CN LCTL_T(KC_N)
-#define LT_AS LOPT_T(KC_S)
-#define LT_GT LCMD_T(KC_T)
-#define LT_SY LSFT_T(KC_Y)
-#define LT_SR RSFT_T(KC_R)
-#define LT_GA RCMD_T(KC_A)
-#define LT_AE ROPT_T(KC_E)
-#define LT_CI RCTL_T(KC_I)
+#define LT_L LCTL_T(KC_L)
+#define LT_A LOPT_T(KC_A)
+#define LT_T LCMD_T(KC_T)
+#define LT_C LSFT_T(KC_C)
+#define LT_I RCMD_T(KC_I)
+#define LT_E ROPT_T(KC_E)
+#define LT_O RCTL_T(KC_O)
 
 enum combo_events {
   COMBO_ENT,
@@ -43,10 +42,10 @@ enum combo_events {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_33_split_space(
-    KC_Z,    KC_C,    KC_M,    KC_W,    KC_K,    KC_J,    KC_V,    KC_O,    KC_U,    KC_NO,
-    LT_CN,   LT_AS,   LT_GT,   LT_SY,   KC_F,    KC_H,    LT_SR,   LT_GA,   LT_AE,   LT_CI,
-    KC_B,    KC_NO,   KC_D,    KC_G,    KC_P,    KC_Q,    KC_L,    KC_X,    KC_NO,   CW_TOGG,
-                      KC_NO,   MT_LSFT, FN_NAV,  LT_SPC,  QK_MAGI,  KC_NO
+    KC_D,    KC_N,    KC_S,    KC_Y,    KC_DOT,  KC_COMM, KC_P,    KC_R,    KC_H,    KC_U,
+    LT_L,    LT_A,    LT_T,    LT_C,    KC_G,    KC_V,    QK_MAGI, LT_I,    LT_E,    LT_O,
+    KC_NO,   KC_Z,    KC_F,    KC_B,    KC_M,    KC_K,    KC_W,    KC_J,    KC_Q,    KC_X,
+                      KC_NO,   MT_LSFT, FN_NAV,  LT_SPC,  KC_TAB,  KC_NO
   ),
 
   [_SYM] = LAYOUT_33_split_space(
@@ -74,8 +73,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef COMBO_ENABLE
 const uint16_t PROGMEM combo_ent[] = {FN_NAV, LT_SPC, COMBO_END};
-const uint16_t PROGMEM combo_eep[] = {KC_Z, KC_C, KC_M, KC_W, COMBO_END};
-const uint16_t PROGMEM combo_cap[] = {KC_G, KC_L, COMBO_END};
+const uint16_t PROGMEM combo_eep[] = {KC_D, KC_N, KC_S, KC_W, COMBO_END};
+const uint16_t PROGMEM combo_cap[] = {KC_B, KC_W, COMBO_END};
 
 combo_t key_combos[] = {
   [COMBO_ENT] = COMBO(combo_ent,KC_ENTER),
@@ -97,15 +96,32 @@ uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
 
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
   switch (keycode) {
-    case LT_AS: return KC_C;
-    case KC_P: return KC_K;
-    case KC_C: return KC_D;
-    case LT_SPC: return KC_ENT;
-  }
-  if ((mods & MOD_MASK_CTRL)) {
-    switch (keycode) {
-      case KC_C: return C(KC_V);
-    }
+    case KC_A: return KC_N;
+    case KC_B: return KC_Y;
+    case KC_C: return KC_K;
+    case KC_D: return KC_L;
+    case KC_E: return KC_H;
+    case KC_F: return KC_T;
+    case KC_G: return KC_NO;
+    case KC_H: return KC_E;
+    case KC_I: return KC_R;
+    case KC_J: return KC_NO;
+    case KC_K: return KC_NO;
+    case KC_L: return KC_D;
+    case KC_M: return KC_Y;
+    case KC_N: return KC_A;
+    case KC_O: return KC_U;
+    case KC_P: return KC_NO;
+    case KC_Q: return KC_U;
+    case KC_R: return KC_I;
+    case KC_S: return KC_T;
+    case KC_T: return KC_S;
+    case KC_U: return KC_NO;
+    case KC_V: return KC_NO;
+    case KC_W: return KC_NO;
+    case KC_X: return KC_NO;
+    case KC_Y: return KC_NO;
+    case KC_Z: return KC_NO;
   }
   return KC_TRNS;
 }
