@@ -45,11 +45,11 @@ enum layers{
 #define LT_SPC LT(_SYM, KC_SPC)
 #define MT_LSFT OSM(MOD_LSFT)
 #define FN_NAV LT(_NAV, KC_ESC)
-#define LT_CN LCTL_T(KC_N)
-#define LT_AS LOPT_T(KC_S)
-#define LT_GT LCMD_T(KC_T)
-#define LT_SY LSFT_T(KC_Y)
-#define LT_SR RSFT_T(KC_R)
+#define LT_CS LCTL_T(KC_S)
+#define LT_AR LOPT_T(KC_R)
+#define LT_GN LCMD_T(KC_N)
+#define LT_SD LSFT_T(KC_D)
+#define LT_ST RSFT_T(KC_T)
 #define LT_GA RCMD_T(KC_A)
 #define LT_AE ROPT_T(KC_E)
 #define LT_CI RCTL_T(KC_I)
@@ -78,9 +78,9 @@ uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_33_split_space(
-    KC_Z   , KC_C   , KC_M   , KC_W   , KC_K   , KC_J   , KC_V   , KC_O   , KC_U   , KC_ESC ,
-    LT_CN  , LT_AS  , LT_GT  , LT_SY  , KC_F   , KC_H   , LT_SR  , LT_GA  , LT_AE  , LT_CI  ,
-    KC_B   , KC_NO  , KC_D   , KC_G   , KC_P   , KC_Q   , KC_L   , KC_X   , KC_NO  , LT_MSE ,
+    KC_Z   , KC_L   , KC_H   , KC_F   , KC_Q   , KC_J   , KC_W   , KC_O   , KC_U   , KC_ESC ,
+    LT_CS  , LT_AR  , LT_GN  , LT_SD  , KC_Y   , KC_M   , LT_ST  , LT_GA  , LT_AE  , LT_CI  ,
+    KC_V   , KC_NO  , KC_B   , KC_C   , KC_P   , KC_K   , KC_G   , KC_X   , KC_NO  , LT_MSE ,
                       XXXXXXX, MT_LSFT, FN_NAV , LT_SPC , LT_MSE , XXXXXXX
   ),
 
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_EEP] = LAYOUT_33_split_space(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(_EEP),
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
@@ -116,8 +116,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef COMBO_ENABLE
 const uint16_t PROGMEM combo_ent[] = {FN_NAV, LT_SPC, COMBO_END};
-const uint16_t PROGMEM combo_eep[] = {KC_Z, KC_C, KC_M, KC_W, COMBO_END};
-const uint16_t PROGMEM combo_cap[] = {KC_G, KC_L, COMBO_END};
+const uint16_t PROGMEM combo_eep[] = {KC_Z, KC_L, KC_H, KC_F, COMBO_END};
+const uint16_t PROGMEM combo_cap[] = {KC_G, KC_C, COMBO_END};
 const uint16_t PROGMEM combo_boot[] = {KC_2, KC_3, KC_6, KC_0, COMBO_END};
 
 combo_t key_combos[] = {
