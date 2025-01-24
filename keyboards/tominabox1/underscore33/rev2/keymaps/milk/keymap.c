@@ -78,9 +78,9 @@ uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_33_split_space(
-    KC_Z,    KC_C,    KC_M,    KC_W,    KC_K,    KC_J,    KC_V,    KC_O,    KC_U,    KC_ESC ,
-    LT_CN,   LT_AS,   LT_GT,   LT_SY,   KC_F,    KC_H,    LT_SR,   LT_GA,   LT_AE,   LT_CI  ,
-    KC_B,    KC_NO,   KC_D,    KC_G,    KC_P,    KC_Q,    KC_L,    KC_X,    KC_NO,   LT_MSE ,
+    KC_Z   , KC_C   , KC_M   , KC_W   , KC_K   , KC_J   , KC_V   , KC_O   , KC_U   , KC_ESC ,
+    LT_CN  , LT_AS  , LT_GT  , LT_SY  , KC_F   , KC_H   , LT_SR  , LT_GA  , LT_AE  , LT_CI  ,
+    KC_B   , KC_NO  , KC_D   , KC_G   , KC_P   , KC_Q   , KC_L   , KC_X   , KC_NO  , LT_MSE ,
                       XXXXXXX, MT_LSFT, FN_NAV , LT_SPC , LT_MSE , XXXXXXX
   ),
 
