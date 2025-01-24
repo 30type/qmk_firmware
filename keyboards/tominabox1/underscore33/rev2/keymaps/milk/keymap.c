@@ -141,9 +141,9 @@ uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
 
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
   switch (keycode) {
-    case LT_AS: return KC_C;
-    case KC_P: return KC_K;
-    case KC_C: return KC_D;
+    case LT_AR: return KC_L;
+    case KC_U: return KC_E;
+    case KC_E: return KC_E;
     case LT_SPC: return KC_ENT;
   }
   if ((mods & MOD_MASK_CTRL)) {
