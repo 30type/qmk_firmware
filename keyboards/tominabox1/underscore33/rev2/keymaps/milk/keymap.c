@@ -58,27 +58,43 @@ enum combo_events {
   COMBO_ENT,
   COMBO_EEP,
   COMBO_CAP,
+  COMBO_BOOT,
 };
+
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+  switch (tap_hold_keycode) {
+    // left thumb keys
+    case MT_LSFT:
+    case FN_NAV:
+    // right thumb keys
+    case LT_SPC:
+    case LT_MSE:
+      return 0;  // Bypass Achordion for these keys.
+// snip...
+  }
+  return 500;
+};
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_33_split_space(
-    KC_Z,    KC_C,    KC_M,    KC_W,    KC_K,    KC_J,    KC_V,    KC_O,    KC_U,    KC_NO  ,
+    KC_Z,    KC_C,    KC_M,    KC_W,    KC_K,    KC_J,    KC_V,    KC_O,    KC_U,    KC_ESC ,
     LT_CN,   LT_AS,   LT_GT,   LT_SY,   KC_F,    KC_H,    LT_SR,   LT_GA,   LT_AE,   LT_CI  ,
     KC_B,    KC_NO,   KC_D,    KC_G,    KC_P,    KC_Q,    KC_L,    KC_X,    KC_NO,   LT_MSE ,
-                      _______, MT_LSFT, FN_NAV , LT_SPC , LT_MSE , _______
+                      XXXXXXX, MT_LSFT, FN_NAV , LT_SPC , LT_MSE , XXXXXXX
   ),
 
   [_SYM] = LAYOUT_33_split_space(
-    KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_EQL,  KC_GRV,  KC_COLN, KC_TILD, KC_PLUS,
-    KC_COMM, KC_DOT,  KC_SLSH, KC_ASTR, KC_CIRC, KC_LBRC, KC_LPRN, KC_LCBR, KC_DQUO, KC_MINS,
-    KC_LT,   KC_GT,   KC_BSLS, KC_PIPE, KC_AMPR, KC_RBRC, KC_RPRN, KC_RCBR, KC_QUOT, KC_UNDS,
+    KC_EXLM, KC_AT  , KC_HASH, KC_DLR , KC_PERC, KC_EQL , KC_GRV , KC_COLN, KC_TILD, KC_PLUS,
+    KC_COMM, KC_DOT , KC_SLSH, KC_ASTR, KC_CIRC, KC_LBRC, KC_LPRN, KC_LCBR, KC_DQUO, KC_MINS,
+    KC_LT  , KC_GT  , KC_BSLS, KC_PIPE, KC_AMPR, KC_RBRC, KC_RPRN, KC_RCBR, KC_QUOT, KC_UNDS,
                       _______, KC_TRNS, KC_SCLN, KC_TRNS, KC_TRNS, _______
   ),
 
   [_NAV] = LAYOUT_33_split_space(
-    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
-    KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_DEL,
-    QK_BOOT, _______, _______, _______, _______, _______, KC_BSPC, KC_TAB,  _______, _______,
+    KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , KC_6   , KC_7   , KC_8   , KC_9   , KC_0   ,
+    KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_NO  , KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_DEL ,
+    XXXXXXX, _______, _______, _______, _______, _______, KC_BSPC, KC_TAB , _______, _______,
                       _______, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______
   ),
 
@@ -90,10 +106,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_EEP] = LAYOUT_33_split_space(
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                      _______, _______, _______, _______, _______, _______
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
   ),
 };
 
@@ -102,11 +118,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM combo_ent[] = {FN_NAV, LT_SPC, COMBO_END};
 const uint16_t PROGMEM combo_eep[] = {KC_Z, KC_C, KC_M, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_cap[] = {KC_G, KC_L, COMBO_END};
+const uint16_t PROGMEM combo_boot[] = {KC_2, KC_3, KC_6, KC_0, COMBO_END};
 
 combo_t key_combos[] = {
   [COMBO_ENT] = COMBO(combo_ent,KC_ENTER),
   [COMBO_EEP] = COMBO(combo_eep,TG(_EEP)),
   [COMBO_CAP] = COMBO(combo_cap,CW_TOGG),
+  [COMBO_BOOT] = COMBO(combo_boot,QK_BOOT),
 };
 #endif
 
