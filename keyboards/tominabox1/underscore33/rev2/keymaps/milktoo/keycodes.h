@@ -1,13 +1,13 @@
 #pragma once
 
 // hrm
-#define MT_CN LCTL_T(KC_N)
+#define MT_CH LCTL_T(KC_H)
 #define MT_CA RCTL_T(KC_A)
 
-#define MT_AS LOPT_T(KC_S)
+#define MT_AN LOPT_T(KC_N)
 #define MT_AI ROPT_T(KC_I)
 
-#define MT_GH LCMD_T(KC_H)
+#define MT_GS LCMD_T(KC_S)
 #define MT_GE RCMD_T(KC_E)
 
 #define MT_ST LSFT_T(KC_T)
@@ -30,7 +30,7 @@
 
 // thumbkeys
 #define LT_R LT(_NAV, KC_R)
-#define NUM LT(_NUM, KC_X)
+#define NUM MO(_NUM)
 #define SPC LT(_SYM, KC_SPC)
 
 
@@ -38,7 +38,7 @@
 // some stuff
 #define C_BSPC C(KC_BSPC)
 
-#define LT_W LT(_WM, KC_W)
+#define WM MO(_WM)
 
 #define TTY1 C(A(KC_F1))
 #define TTY2 C(A(KC_F2))

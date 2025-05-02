@@ -29,15 +29,14 @@ enum layers {
     _CO2,
     _EEP
 };
-
 // keymap
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = LAYOUT_33_custom(
-        KC_V   , KC_B   , KC_L   , KC_K   , XXXXXXX, CW_TOGG, KC_F   , KC_O   , KC_U   , C_BSPC ,
-        MT_CN  , MT_AS  , MT_GH  , MT_ST  , KC_G   , KC_Y   , MT_SC  , MT_GE  , MT_AI  , MT_CA  ,
-        KC_ESC , XXXXXXX, KC_ENT , KC_D   , KC_NO  , KC_P   , LT_W   , NUM   , MO(_FUN), XXXXXXX,
-                          XXXXXXX, XXXXXXX, LT_R   , KC_SLSH, SPC    , XXXXXXX, XXXXXXX
+        KC_B   , KC_L   , KC_F   , KC_D   , KC_M   , KC_P   , KC_Y   , KC_O   , KC_U   , C_BSPC,
+        MT_CH  , MT_AN  , MT_GS  , MT_ST  , KC_G   , KC_W   , MT_SC  , MT_GE  , MT_AI  , MT_CA  ,
+        XXXXXXX, XXXXXXX, XXXXXXX, LT_R   , XXXXXXX, WM     , SPC    , NUM    , XXXXXXX, XXXXXXX,
+                          XXXXXXX, XXXXXXX, LT_R   , KC_NO  , SPC   , MO(_FUN), XXXXXXX
     ),
 
     [_GAME] = LAYOUT_33_custom(
@@ -55,9 +54,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NAV] = LAYOUT_33_custom(
-        KC_PSCR, _______, _______, _______, _______, _______, KC_HOME, KC_UP  , KC_END , _______,
-        KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, _______, KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL ,
-        XXXXXXX, _______, _______, _______, _______, KC_PGDN, KC_BSPC, KC_TAB , _______, _______,
+        KC_PSCR, _______, _______, _______, _______, KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_BSPC,
+        KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL ,
+        XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                           _______, _______, _______, _______, _______, TTY1   , TTY2
     ),
 
@@ -112,31 +111,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // combo shit
 enum combo_events {
+    COMBO_ESC,
+    COMBO_TAB,
+    COMBO_ENT,
     COMBO_QUE,
     COMBO_CAP,
     COMBO_JJJ,
     COMBO_QQQ,
     COMBO_ZZZ,
-    COMBO_MMM,
+    COMBO_XXX,
+    COMBO_VVV,
+    COMBO_KKK,
     COMBO_EEP,
 };
 
 #ifdef COMBO_ENABLE
+const uint16_t PROGMEM combo_esc[] = {G_01 , G_13 ,        COMBO_END};
+const uint16_t PROGMEM combo_tab[] = {G_08 , G_16 ,        COMBO_END};
+const uint16_t PROGMEM combo_ent[] = {G_03 , G_14 ,        COMBO_END};
 const uint16_t PROGMEM combo_que[] = {G_13 , G_14 ,        COMBO_END};
 const uint16_t PROGMEM combo_cap[] = {G_14 , G_15 ,        COMBO_END};
-const uint16_t PROGMEM combo_jjj[] = {G_01 , G_02 ,        COMBO_END};
-const uint16_t PROGMEM combo_qqq[] = {G_02 , G_03 ,        COMBO_END};
+const uint16_t PROGMEM combo_jjj[] = {G_05 , G_15 ,        COMBO_END};
+const uint16_t PROGMEM combo_qqq[] = {G_06 , G_16 ,        COMBO_END};
 const uint16_t PROGMEM combo_zzz[] = {G_01 , G_03 ,        COMBO_END};
-const uint16_t PROGMEM combo_mmm[] = {G_02 , G_12 ,        COMBO_END};
-const uint16_t PROGMEM combo_eep[] = {G_03 , G_06 , G_08 , COMBO_END};
+const uint16_t PROGMEM combo_xxx[] = {G_01 , G_11 ,        COMBO_END};
+const uint16_t PROGMEM combo_vvv[] = {G_02 , G_12 ,        COMBO_END};
+const uint16_t PROGMEM combo_kkk[] = {G_03 , G_13 ,        COMBO_END};
+const uint16_t PROGMEM combo_eep[] = {G_03 , G_05 , G_08 , COMBO_END};
 
 combo_t key_combos[] = {
+    [COMBO_ESC] = COMBO(combo_esc,KC_ESC),
+    [COMBO_TAB] = COMBO(combo_tab,KC_TAB),
+    [COMBO_ENT] = COMBO(combo_ent,KC_ENT),
     [COMBO_QUE] = COMBO(combo_que,KC_QUES),
     [COMBO_CAP] = COMBO(combo_cap,KC_CAPS),
     [COMBO_JJJ] = COMBO(combo_jjj,KC_J),
     [COMBO_QQQ] = COMBO(combo_qqq,KC_Q),
     [COMBO_ZZZ] = COMBO(combo_zzz,KC_Z),
-    [COMBO_MMM] = COMBO(combo_mmm,KC_M),
+    [COMBO_XXX] = COMBO(combo_xxx,KC_X),
+    [COMBO_VVV] = COMBO(combo_vvv,KC_V),
+    [COMBO_KKK] = COMBO(combo_kkk,KC_K),
     [COMBO_EEP] = COMBO(combo_eep,TG(_EEP)),
 };
 #endif
