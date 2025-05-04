@@ -16,4 +16,9 @@
 #pragma once
 
 /* Combos */
-#define COMBO_TERM 50
+#define COMBO_TERM 20
+// #define COMBO_ONLY_FROM_LAYER 6
+
+#define TAPPING_TERM 150
+#define PERMISSIVE_HOLD
+#define QUICK_TAP_TERM_PER_KEY

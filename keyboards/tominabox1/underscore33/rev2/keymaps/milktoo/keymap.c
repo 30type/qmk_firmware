@@ -13,7 +13,7 @@
 #include QMK_KEYBOARD_H
 #include "features/achordion.h"
 #include "features/repeat_key.h"
-#include "./keycodes.h"
+#include "./keycodes.c"
 
 
 
@@ -25,8 +25,7 @@ enum layers {
     _NUM,
     _WM,
     _FUN,
-    _CO1,
-    _CO2,
+    _REF,
     _EEP
 };
 // keymap
@@ -82,19 +81,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     // abstraction laye for letter-combos
-    [_CO1] = LAYOUT_33_custom(
-        G_00   , G_01   , G_02   , G_03   , G_04   , G_05   , G_06   , G_07   , G_08   , G_09   ,
-        G_10   , G_11   , G_12   , G_13   , G_14   , G_15   , G_16   , G_17   , G_18   , G_19   ,
-        G_20   , G_21   , G_22   , G_23   , G_24   , G_25   , G_26   , G_27   , G_28   , G_29   ,
-                          G_32   , G_33   , G_34   , G_35   , G_36   , G_37   , XXXXXXX
-    ),
-
-    // abstraction laye for symbol-combos
-    [_CO2] = LAYOUT_33_custom(
-        H_00   , H_01   , H_02   , H_03   , H_04   , H_05   , H_06   , H_07   , H_08   , H_09   ,
-        H_10   , H_11   , H_12   , H_13   , H_14   , H_15   , H_16   , H_17   , H_18   , H_19   ,
-        H_20   , H_21   , H_22   , H_23   , H_24   , H_25   , H_26   , H_27   , H_28   , H_29   ,
-                          H_32   , H_33   , H_34   , H_35   , H_36   , H_37   , XXXXXXX
+    [_REF] = LAYOUT_33_custom(
+        LP01   , LR01   , LM01   , LI01   , LI11   , RI11   , RI01   , RM01   , RR01   , RP01   ,
+        LP02   , LR02   , LM02   , LI02   , LI12   , RI12   , RI02   , RM02   , RR02   , RP02   ,
+        XXXXXXX, XXXXXXX, XXXXXXX, LT01   , LT02   , RT02   , RT01   , XXXXXXX, XXXXXXX, XXXXXXX,
+                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
     // afk layer
@@ -126,18 +117,18 @@ enum combo_events {
 };
 
 #ifdef COMBO_ENABLE
-const uint16_t PROGMEM combo_esc[] = {G_01 , G_13 ,        COMBO_END};
-const uint16_t PROGMEM combo_tab[] = {G_08 , G_16 ,        COMBO_END};
-const uint16_t PROGMEM combo_ent[] = {G_03 , G_14 ,        COMBO_END};
-const uint16_t PROGMEM combo_que[] = {G_13 , G_14 ,        COMBO_END};
-const uint16_t PROGMEM combo_cap[] = {G_14 , G_15 ,        COMBO_END};
-const uint16_t PROGMEM combo_jjj[] = {G_05 , G_15 ,        COMBO_END};
-const uint16_t PROGMEM combo_qqq[] = {G_06 , G_16 ,        COMBO_END};
-const uint16_t PROGMEM combo_zzz[] = {G_01 , G_03 ,        COMBO_END};
-const uint16_t PROGMEM combo_xxx[] = {G_01 , G_11 ,        COMBO_END};
-const uint16_t PROGMEM combo_vvv[] = {G_02 , G_12 ,        COMBO_END};
-const uint16_t PROGMEM combo_kkk[] = {G_03 , G_13 ,        COMBO_END};
-const uint16_t PROGMEM combo_eep[] = {G_03 , G_05 , G_08 , COMBO_END};
+const uint16_t PROGMEM combo_esc[] = {LR01 , LI02 ,        COMBO_END};
+const uint16_t PROGMEM combo_tab[] = {RR01 , RI02 ,        COMBO_END};
+const uint16_t PROGMEM combo_ent[] = {LI01 , LI12 ,        COMBO_END};
+const uint16_t PROGMEM combo_que[] = {LI02 , LI12 ,        COMBO_END};
+const uint16_t PROGMEM combo_cap[] = {LI12 , RI12 ,        COMBO_END};
+const uint16_t PROGMEM combo_jjj[] = {RI11 , RI12 ,        COMBO_END};
+const uint16_t PROGMEM combo_qqq[] = {RI01 , RI02 ,        COMBO_END};
+const uint16_t PROGMEM combo_zzz[] = {LP01 , LP02 ,        COMBO_END};
+const uint16_t PROGMEM combo_xxx[] = {LR01 , LR02 ,        COMBO_END};
+const uint16_t PROGMEM combo_vvv[] = {LM01 , LM02 ,        COMBO_END};
+const uint16_t PROGMEM combo_kkk[] = {LI01 , LI02 ,        COMBO_END};
+const uint16_t PROGMEM combo_eep[] = {LI01 , RI11 , RR01 , COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_ESC] = COMBO(combo_esc,KC_ESC),
@@ -157,13 +148,8 @@ combo_t key_combos[] = {
 
 uint8_t combo_ref_from_layer(uint8_t layer){
     switch (get_highest_layer(layer_state)){
-        case _NAV :
-        case _SYM :
-        case _NUM :
-          return _CO2;
-
         case _EEP : return _EEP;
-        default   : return _CO1;
+        default   : return _REF;
     }
     return layer;  // important if default is not in case.
 }
