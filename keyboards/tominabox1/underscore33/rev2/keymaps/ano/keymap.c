@@ -18,20 +18,37 @@
 enum layers{
   _BASE,
   _NUM,
+  _WIN,
   _SYM,
   _NAV
 };
 
-#define SPC LT(_NUM_SYM, KC_SPC)
+#define SPC LT(_SYM, KC_SPC)
 #define R LT(_NAV, KC_R)
-#define KC_GA LGUI_T(KC_A)
-#define KC_AS LALT_T(KC_S)
-#define KC_CD LCTL_T(KC_D)
-#define KC_SF LSFT_T(KC_F)
-#define KC_SJ RSFT_T(KC_J)
-#define KC_CK RCTL_T(KC_K)
-#define KC_AL RALT_T(KC_L)
-#define KC_GSCLN RGUI_T(KC_SCLN)
+#define C_BSPC C(KC_BSPC)
+#define M LT(_WIN, KC_M)
+#define D LT(_NUM, KC_D)
+#define MAGI QK_LEADER
+
+#define MT_CN LCTL_T(KC_N)
+#define MT_AS LALT_T(KC_S)
+#define MT_GH LGUI_T(KC_H)
+#define MT_SC LSFT_T(KC_C)
+
+#define MT_ST RSFT_T(KC_T)
+#define MT_GE RGUI_T(KC_E)
+#define MT_AA RALT_T(KC_A)
+#define MT_CI RCTL_T(KC_I)
+
+#define WM_01 G(KC_1)
+#define WM_02 G(KC_2)
+#define WM_03 G(KC_3)
+#define WM_04 G(KC_4)
+#define WM_05 G(KC_5)
+
+// enum custom_keycodes {
+//   MAGI = SAFE_RANGE  
+// };
 
 enum combo_events {
   COMBO_BSPC,
@@ -43,24 +60,38 @@ enum combo_events {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_33_split_space(
-        KC_B   , KC_L   , KC_F   , _______, _______, _______, _______, KC_O   , KC_U   , KC_BSPC,
-        KC_CH  , KC_AN  , KC_GS  , KC_SC  , KC_Y   , KC_G   , KC_ST  , KC_GA  , KC_AE  , KC_CI  ,
-        _______, _______, _______, KC_W   , KC_P   , KC_M   , KC_D   , _______, _______, _______,
+        KC_B   , KC_F   , KC_L   , KC_Q   , _______, _______, KC_V   , KC_U   , KC_O   , KC_Y   ,
+        MT_CN  , MT_AS  , MT_GH  , MT_SC  , KC_P   , MAGI   , MT_ST  , MT_GE  , MT_AA  , MT_CI  ,
+        KC_X   , KC_Z   , KC_K   , KC_W   , KC_G   , M      , D      , _______, _______, _______,
                           _______, _______, R      , SPC    , _______, _______
     ),
 
-    [_NUM_SYM] = LAYOUT_33_split_space(
-        KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , KC_6   , KC_7   , KC_8   , KC_9   , KC_0   ,
+    [_SYM] = LAYOUT_33_split_space(
+        KC_1   , KC_2   , KC_3   , _______, _______, _______, _______, KC_8   , KC_9   , KC_0   ,
         KC_EXLM, KC_AT  , KC_HASH, KC_DLR , KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_EQUAL, KC_MINS,
-        KC_BSLS, KC_LCBR, KC_LBRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_RBRC, KC_RCBR, KC_DOT,  KC_GRV ,
-                      KC_TRNS,   KC_TRNS,  KC_TRNS, KC_TRNS,   KC_TRNS,  KC_TRNS
+        _______, _______, _______, KC_LPRN, KC_UNDS, KC_RPRN, KC_RBRC, _______, _______, _______,
+                          _______, _______, _______, _______, _______, _______
     ),
 
     [_NAV] = LAYOUT_33_split_space(
-        QK_BOOT,  KC_NO,    KC_NO,    KC_NO,  KC_NO,   KC_GRV,  KC_PGDN,    KC_UP,  KC_PGUP,  KC_SCLN,
-        UG_TOGG,  UG_HUEU,  UG_SATU,  UG_VALU,  KC_NO,  KC_HOME,  KC_LEFT,  KC_DOWN,  KC_RGHT,   KC_END,
-        UG_NEXT,  UG_HUED,  UG_SATD,  UG_VALD,  KC_NO,  KC_MINS,    KC_INT1,  KC_COMM,   KC_DOT,  KC_BSLS,
-                       KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS
+        KC_PSCR, KC_NO  , _______, _______, QK_BOOT, KC_GRV , KC_PGDN, KC_UP  , KC_PGUP, KC_BSPC,
+        KC_LCTL, KC_LALT, KC_LCMD, KC_LSFT, KC_NO  , KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END ,
+        _______, _______, _______, _______, KC_NO  , KC_MINS, KC_INT1, KC_COMM, KC_DOT , KC_BSLS,
+                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    ),
+
+    [_WIN] = LAYOUT_33_split_space(
+        _______, _______, _______, _______, KC_NO  , KC_GRV , KC_PGDN, KC_UP  , KC_PGUP, KC_SCLN,
+        WM_05  , WM_03  , WM_02  , WM_01  , KC_NO  , KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END ,
+        _______, _______, _______, WM_04  , KC_NO  , _______, KC_INT1, KC_COMM, KC_DOT , KC_BSLS,
+                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    ),
+    
+    [_NUM] = LAYOUT_33_split_space(
+        _______, KC_6   , KC_5   , _______, _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,
+        _______, KC_3   , KC_2   , KC_1   , _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,
+        _______, _______, _______, KC_4   , _______, KC_NO  , _______, KC_NO  , KC_NO  , KC_NO  ,
+                          KC_TRNS, KC_TRNS, KC_0   , KC_TRNS, KC_TRNS, KC_TRNS
     ),
 };
 
@@ -82,3 +113,19 @@ combo_t key_combos[] = {
 };
 #endif
   
+void leader_start_user(void) {
+    // Do something when the leader key is pressed
+}
+
+void leader_end_user(void) {
+    if (leader_sequence_one_key(KC_N)) {
+        // Leader, f => Types the below string
+        SEND_STRING("x");
+    } else if (leader_sequence_one_key(KC_S)) {
+        // Leader, f => Types the below string
+        SEND_STRING("v");
+    } else if (leader_sequence_one_key(KC_H)) {
+        // Leader, f => Types the below string
+        SEND_STRING("k");
+    } 
+}

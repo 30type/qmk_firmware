@@ -17,3 +17,4 @@
 
 /* Combos */
 #define COMBO_TERM 50
+#define LEADER_TIMEOUT 225
