@@ -1,20 +1,33 @@
-/* Copyright 2020 tominabox1
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 #pragma once
 
-/* Combos */
-#define COMBO_TERM 50
+// Tapping settings
+#define TAPPING_TERM 200                 // Base tapping term
+#define QUICK_TAP_TERM TAPPING_TERM / 2  // Quick Tap Term to trigger auto-repeat
+
+// Allows media codes to properly register in macros and rotary encoder code
+// #define TAP_CODE_DELAY 15               // Introduces delay between code taps so no keys get eaten.
+
 #define LEADER_TIMEOUT 225
+
+// Combos!
+#define COMBO_TERM 36                   // Gotta combo fast.
+// #define COMBO_ONLY_FROM_LAYER 2         // compare only with the COMBOREF layer.
+// #define COMBO_TERM_PER_COMBO            // Adjust combo term for ease of combo.
+// #define COMBO_STRICT_TIMER              // all keys must be hit within the term from the first keypress.
+
+// EE hands will literally always be enabled
+// #undef EE_HANDS
+// #define EE_HANDS
+
+// debounce getting  funky
+// #define DEBOUNCE 10
+
+// SPACE SAVERS FOR ALL BOARDS.
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+#define LAYER_STATE_16BIT
+
+// Layout macros
+// #ifndef __ASSEMBLER__
+// #   include "layout.h"
+// #endif

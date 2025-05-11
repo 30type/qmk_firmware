@@ -13,7 +13,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include QMK_KEYBOARD_H
+
+enum custom_keycodes {
+  OS_LMEH = SAFE_RANGE,
+  OS_LSFT
+};
+
+#include "features/nshot_mod.h"
+// #include "./nshot.c"
 
 enum layers{
   _BASE,
@@ -28,7 +37,7 @@ enum layers{
 #define C_BSPC C(KC_BSPC)
 #define M LT(_WIN, KC_M)
 #define D LT(_NUM, KC_D)
-#define MAGI QK_LEADER
+#define MAGI OS_LSFT
 
 #define MT_CN LCTL_T(KC_N)
 #define MT_AS LALT_T(KC_S)
@@ -46,10 +55,6 @@ enum layers{
 #define WM_04 G(KC_4)
 #define WM_05 G(KC_5)
 
-// enum custom_keycodes {
-//   MAGI = SAFE_RANGE  
-// };
-
 enum combo_events {
   COMBO_BSPC,
   COMBO_NUMBAK,
@@ -63,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_B   , KC_F   , KC_L   , KC_Q   , _______, _______, KC_V   , KC_U   , KC_O   , KC_Y   ,
         MT_CN  , MT_AS  , MT_GH  , MT_SC  , KC_P   , MAGI   , MT_ST  , MT_GE  , MT_AA  , MT_CI  ,
         KC_X   , KC_Z   , KC_K   , KC_W   , KC_G   , M      , D      , _______, _______, _______,
-                          _______, _______, R      , SPC    , _______, _______
+                          _______, _______, R      , SPC    , OS_LSFT, _______
     ),
 
     [_SYM] = LAYOUT_33_split_space(
